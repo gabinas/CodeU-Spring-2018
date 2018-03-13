@@ -1,7 +1,6 @@
 package codeu.controller;
 
 import java.io.IOException;
-//import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +13,6 @@ public class RegisterServletTest {
 
  private RegisterServlet registerServlet;
  private HttpServletRequest mockRequest;
- //private PrintWriter mockPrintWriter;
  private HttpServletResponse mockResponse;
  private RequestDispatcher mockRequestDispatcher;
 
@@ -22,10 +20,8 @@ public class RegisterServletTest {
  public void setup() throws IOException {
    registerServlet = new RegisterServlet();
    mockRequest = Mockito.mock(HttpServletRequest.class);
-   //mockPrintWriter = Mockito.mock(PrintWriter.class);
    mockResponse = Mockito.mock(HttpServletResponse.class);
    mockRequestDispatcher = Mockito.mock(RequestDispatcher.class);
-   //Mockito.when(mockResponse.getWriter()).thenReturn(mockPrintWriter);
    Mockito.when(mockRequest.getRequestDispatcher("/WEB-INF/view/register.jsp"))
     .thenReturn(mockRequestDispatcher);
  }
@@ -34,7 +30,6 @@ public class RegisterServletTest {
  public void testDoGet() throws IOException, ServletException {
    registerServlet.doGet(mockRequest, mockResponse);
 
-   //Mockito.verify(mockPrintWriter).println("<h1>RegisterServlet GET request.</h1>");
    Mockito.verify(mockRequestDispatcher).forward(mockRequest, mockResponse);
  }
 }
