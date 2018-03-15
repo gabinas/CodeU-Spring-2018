@@ -79,8 +79,8 @@ public class LoginServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request,response);
       }
     }else{
-  		request.setAttribute("error", "That username was not found.");
-  		request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request,response);
+      request.setAttribute("error", "That username was not found.");
+      request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request,response);
     }
   }
 }
