@@ -66,21 +66,21 @@ public class LoginServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
-	String username = request.getParameter("username");
-	String password = request.getParameter("password");
+    String username = request.getParameter("username");
+    String password = request.getParameter("password");
 
     if (userStore.isUserRegistered(username)) {
       User user = userStore.getUser(username);
-	  if(password.equals(user.getPassword())){
-		  request.getSession().setAttribute("user",username);
-		  response.sendRedirect("/conversations");
-	  }else{
-		  request.setAttribute("error","Invalid password.");
-		  request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request,response);
-	  }
-	}else{
-		request.setAttribute("error", "That username was not found.");
-		request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request,response);
-	}
+  	  if(password.equals(user.getPassword())){
+  		  request.getSession().setAttribute("user",username);
+  		  response.sendRedirect("/conversations");
+  	  }else{
+  		  request.setAttribute("error","Invalid password.");
+  		  request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request,response);
+  	  }
+    }else{
+  		request.setAttribute("error", "That username was not found.");
+  		request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request,response);
+    }
   }
 }
