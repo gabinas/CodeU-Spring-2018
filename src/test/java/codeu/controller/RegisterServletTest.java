@@ -36,7 +36,6 @@ public class RegisterServletTest {
    registerServlet.doGet(mockRequest, mockResponse);
 
    verify(mockRequest).getRequestDispatcher("/WEB-INF/view/register.jsp");
-
  }
 
  @Test
@@ -45,9 +44,9 @@ public class RegisterServletTest {
 
     registerServlet.doPost(mockRequest, mockResponse);
 
-    Mockito.verify(mockRequest)
+    verify(mockRequest)
         .setAttribute("error", "Please enter only letters, numbers, and spaces.");
-    Mockito.verify(mockRequestDispatcher).forward(mockRequest, mockResponse);
+    verify(mockRequestDispatcher).forward(mockRequest, mockResponse);
   }
 
   @Test
@@ -62,10 +61,10 @@ public class RegisterServletTest {
 
     ArgumentCaptor<User> userArgumentCaptor = ArgumentCaptor.forClass(User.class);
 
-    Mockito.verify(mockUserStore).addUser(userArgumentCaptor.capture());
+    verify(mockUserStore).addUser(userArgumentCaptor.capture());
     Assert.assertEquals(userArgumentCaptor.getValue().getName(), "test username");
 
-    Mockito.verify(mockResponse).sendRedirect("/login");
+    verify(mockResponse).sendRedirect("/login");
   }
 
   @Test
@@ -78,10 +77,10 @@ public class RegisterServletTest {
 
     registerServlet.doPost(mockRequest, mockResponse);
 
-    Mockito.verify(mockUserStore, Mockito.never()).addUser(Mockito.any(User.class));
+    verify(mockUserStore, Mockito.never()).addUser(Mockito.any(User.class));
 
-    Mockito.verify(mockRequest)
+    verify(mockRequest)
         .setAttribute("error", "That username is already taken.");
-    Mockito.verify(mockRequestDispatcher).forward(mockRequest, mockResponse);
+    verify(mockRequestDispatcher).forward(mockRequest, mockResponse);
   }
 }
