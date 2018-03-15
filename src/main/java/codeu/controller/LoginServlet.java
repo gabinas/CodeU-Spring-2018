@@ -66,8 +66,8 @@ public class LoginServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
-	String username = request.getParameter("username");
-	String password = request.getParameter("password");
+    String username = request.getParameter("username");
+    String password = request.getParameter("password");
 
     if (userStore.isUserRegistered(username)) {
       User user = userStore.getUser(username);
