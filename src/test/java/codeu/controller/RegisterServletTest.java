@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import static org.mockito.Mockito.verify;
 
 public class RegisterServletTest {
 

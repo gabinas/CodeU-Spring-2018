@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
-* Servlet class responsible for user registration.
+* Handles requests to the /register URL.
 */
 public class RegisterServlet extends HttpServlet {
 
