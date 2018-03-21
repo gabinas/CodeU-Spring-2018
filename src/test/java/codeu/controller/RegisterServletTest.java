@@ -39,7 +39,7 @@ public class RegisterServletTest {
  }
 
  @Test
-  public void testDoPost_BadUsername() throws IOException, ServletException {
+  public void testDoPost_badUsername() throws IOException, ServletException {
     Mockito.when(mockRequest.getParameter("username")).thenReturn("bad !@#$% username");
 
     registerServlet.doPost(mockRequest, mockResponse);
@@ -50,7 +50,7 @@ public class RegisterServletTest {
   }
 
   @Test
-  public void testDoPost_NewUser() throws IOException, ServletException {
+  public void testDoPost_newUser() throws IOException, ServletException {
     Mockito.when(mockRequest.getParameter("username")).thenReturn("test username");
 
     UserStore mockUserStore = Mockito.mock(UserStore.class);
@@ -68,7 +68,7 @@ public class RegisterServletTest {
   }
 
   @Test
-  public void testDoPost_ExistingUser() throws IOException, ServletException {
+  public void testDoPost_existingUser() throws IOException, ServletException {
     Mockito.when(mockRequest.getParameter("username")).thenReturn("test username");
 
     UserStore mockUserStore = Mockito.mock(UserStore.class);
