@@ -27,6 +27,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class LoginServletTest {
 
@@ -36,6 +37,7 @@ public class LoginServletTest {
   private RequestDispatcher mockRequestDispatcher;
   private User mockUser;
   private UserStore mockUserStore;
+  private String hashedPassword;
 
   @Before
   public void setup() {
@@ -67,7 +69,9 @@ public class LoginServletTest {
     loginServlet.setUserStore(mockUserStore);
 
     Mockito.when(mockUserStore.getUser("test username")).thenReturn(mockUser);
-    Mockito.when(mockUser.getPassword()).thenReturn("testPassword");
+
+    hashedPassword = BCrypt.hashpw("testPassword",BCrypt.gensalt());
+    Mockito.when(mockUser.getPassword()).thenReturn(hashedPassword);
 	
     HttpSession mockSession = Mockito.mock(HttpSession.class);
     Mockito.when(mockRequest.getSession()).thenReturn(mockSession);
@@ -103,7 +107,9 @@ public class LoginServletTest {
     loginServlet.setUserStore(mockUserStore);
 
     Mockito.when(mockUserStore.getUser("test username")).thenReturn(mockUser);
-    Mockito.when(mockUser.getPassword()).thenReturn("wrongPassword");
+
+    hashedPassword = BCrypt.hashpw("wrongPassword",BCrypt.gensalt());
+    Mockito.when(mockUser.getPassword()).thenReturn(hashedPassword);
 
     loginServlet.doPost(mockRequest, mockResponse);
 
