@@ -14,6 +14,6 @@ public class FeedServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response)
     throws IOException, ServletException {
 
-    response.getWriter().println("<h1>FeedServlet GET request.</h1>");
+    request.getRequestDispatcher("/WEB-INF/view/feed.jsp").forward(request, response);
   }
 }
