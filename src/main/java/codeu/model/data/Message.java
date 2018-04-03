@@ -18,13 +18,13 @@ import java.time.Instant;
 import java.util.UUID;
 
 /** Class representing a message. Messages are sent by a User in a Conversation. */
-public class Message extends Event {
+public class Message {
 
- // private final UUID id;
+  private final UUID id;
   private final UUID conversation;
   private final UUID author;
   private final String content;
- // private final Instant creation;
+  private final Instant creation;
 
   /**
    * Constructs a new Message.
@@ -36,15 +36,16 @@ public class Message extends Event {
    * @param creation the creation time of this Message
    */
   public Message(UUID id, UUID conversation, UUID author, String content, Instant creation) {
-    super(id, creation);
+    this.id = id;
     this.conversation = conversation;
     this.author = author;
     this.content = content;
+    this.creation = creation;
   }
 
   /** Returns the ID of this Message. */
   public UUID getId() {
-    return super.getId();
+    return id;
   }
 
   /** Returns the ID of the Conversation this Message belongs to. */
@@ -64,6 +65,6 @@ public class Message extends Event {
 
   /** Returns the creation time of this Message. */
   public Instant getCreationTime() {
-    return super.getCreationTime();
+    return creation;
   }
 }
