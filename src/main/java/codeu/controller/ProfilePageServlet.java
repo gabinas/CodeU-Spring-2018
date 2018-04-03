@@ -2,6 +2,7 @@ package codeu.controller;
 
 import codeu.model.store.basic.UserStore;
 import codeu.model.store.basic.MessageStore;
+import codeu.model.data.User;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +15,7 @@ import java.util.UUID;
 *Servlet class responsible for User profile pages.
 */
 
-public class ProfilePagesServlet extends HttpServlet {
+public class ProfilePageServlet extends HttpServlet {
 
   // Store class that gives access to Users
   private UserStore userStore;
@@ -34,7 +35,7 @@ public class ProfilePagesServlet extends HttpServlet {
       String requestUrl = request.getRequestURI();
       String userName = requestUrl.substring("/profile/".length());
 
-      User user = userStore.getUser(username);
+      User user = userStore.getUser(userName);
 
       if ( user == null) {
         // couldn't find user, redirect to home page
