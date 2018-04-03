@@ -93,9 +93,8 @@
 
 <servlet-mapping>
   <servlet-name>ProfilePageServlet</servlet-name>
-  <url-pattern>/user</url-pattern>
+  <url-pattern>/profile</url-pattern>
 </servlet-mapping>
-
 
 
 </web-app>
