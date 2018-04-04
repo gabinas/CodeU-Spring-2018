@@ -47,9 +47,12 @@
         <li><strong>Gabriela Lugo:</strong> Coming Soon!<!-- Write a little about yourself here --> </li>
         <li><strong>Martin Landin:</strong> Coming Soon!<!-- Write a little about yourself here --></li>
         <li><strong>Mary Shen:</strong> Coming Soon!<!-- Write a little about yourself here --></li>
-        <li><strong> Shining Liu:</strong> Coming Soon!<!-- Write a little about yourself here --></li>
+        <li><strong>Shining Liu</strong></li>
+        <ul>
+          <li>Shining is a sophomore majoring in Web Design and Engineering at Santa Clara University.</li>
+        </ul>
       </ul>
-		
+
       <p>
         This is your code now. Get familiar with it and get comfortable
         working with your team to plan and make changes. Start by updating the
