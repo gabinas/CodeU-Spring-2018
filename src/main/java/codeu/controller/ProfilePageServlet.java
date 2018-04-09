@@ -29,10 +29,10 @@ public class ProfilePageServlet extends HttpServlet {
   * It then forwards to profile.jsp for rendering
   */
   @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response)
+public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
 
-      String requestUrl = request.getRequestURI();
+      /*String requestUrl = request.getRequestURI();
       String userName = requestUrl.substring("/profile/".length());
 
       User user = userStore.getUser(userName);
@@ -41,11 +41,9 @@ public class ProfilePageServlet extends HttpServlet {
         // couldn't find user, redirect to home page
         response.sendRedirect("/index");
         return;
-      }
+      }*/
 
       request.getRequestDispatcher("/WEB-INF/view/profile.jsp").forward(request, response);
 
-
-
     }
-}
+  }
