@@ -18,11 +18,11 @@ import java.time.Instant;
 import java.util.UUID;
 
 /** Class representing a registered user. */
-public class User extends Event{
-  //private final UUID id;
+public class User {
+  private final UUID id;
   private final String name;
   private final String hashedPassword;
-  //private final Instant creation;
+  private final Instant creation;
 
   /**
    * Constructs a new User.
@@ -33,14 +33,15 @@ public class User extends Event{
    * @param creation the creation time of this User
    */
   public User(UUID id, String name, String hashedPassword, Instant creation) {
-    super(id, creation);    
+    this.id = id;
     this.name = name;
     this.hashedPassword = hashedPassword;
+    this.creation = creation;
   }
 
   /** Returns the ID of this User. */
   public UUID getId() {
-    return super.getId();
+    return id;
   }
 
   /** Returns the username of this User. */
@@ -50,7 +51,7 @@ public class User extends Event{
 
   /** Returns the creation time of this User. */
   public Instant getCreationTime() {
-    return super.getCreationTime();
+    return creation;
   }
   /** Returns the password of this User */
   public String getPassword() {
