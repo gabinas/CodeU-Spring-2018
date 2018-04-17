@@ -25,10 +25,10 @@ public class EventTest {
   public void testCreate() {
     UUID id = UUID.randomUUID();
     Instant creation = Instant.now();
-    
+
     Event event = new Event(id, creation);
 
-    Assert.assertEquals(id, user.getId());
-    Assert.assertEquals(creation, user.getCreationTime());
+    Assert.assertEquals(id, event.getId());
+    Assert.assertEquals(creation, event.getCreationTime());
   }
 }

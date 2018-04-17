@@ -12,65 +12,78 @@ import codeu.model.data.Event;
 
 public class EventStore {
 
-	List<Conversation> conversations = ConversationStore.getInstance().getAllConversations();
-	List<Message> messages = MessageStore.getInstance().getAllMessages();
-	List<User> users = UserStore.getInstance().getAllUsers();
+  List<Conversation> conversations = ConversationStore.getInstance().getAllConversations();
+  List<Message> messages = MessageStore.getInstance().getAllMessages();
+  List<User> users = UserStore.getInstance().getAllUsers();
 
-	/**
-	 * Clones every list of events, and returns all of the events up to date
-	 */
-	public List<Event> listAllEvents() {
+  /**
+   * Clones every list of events, and returns all of the events up to date
+   */
+  public List<Event> listAllEvents() {
 
-		List<Event> events = new ArrayList<>();
-		List<Event> co = new ArrayList<>();
-		List<Event> me = new ArrayList<>();
-		List<Event> us = new ArrayList<>();
+    List<Event> events = new ArrayList<>();
+    List<Event> co = new ArrayList<>();
+    List<Event> me = new ArrayList<>();
+    List<Event> us = new ArrayList<>();
 
-		for (Conversation c : conversations) 
-			co.add(c);
-	
-		for (Message m : messages) 
-			me.add(m);
+    for (Conversation c : conversations) 
+      co.add(c);
+  
+    for (Message m : messages) 
+      me.add(m);
 
-		for (User u : users)
-			us.add(u);
-		
+    for (User u : users)
+      us.add(u);
+    
+    events = mergeLists(co, me);
+    events = mergeLists(events, us);
 
-		events = mergeLists(co, me);
-		events = mergeLists(events, us);
+    return events;
+  }
+  
+  /**
+   * Takes two sorted lists and merges while keeping the sort
+   * @param firstList
+   * @param secondList
+   * @return sorted merge of second and first list
+   */
+  public List<Event> mergeLists(List<Event> firstList, List<Event> secondList) {
+    List<Event> output = new ArrayList<>();
 
-		return events;
-	}
-	
-	/**
-	 * Takes two sorted lists and merges while keeping the sort
-	 * @param firstList
-	 * @param secondList
-	 * @return sorted merge of second and first list
-	 */
-	public List<Event> mergeLists(List<Event> firstList, List<Event> secondList) {
-		List<Event> output = new ArrayList<>();
+    // Create compare to method for if statements
+    while (!firstList.isEmpty() && !secondList.isEmpty()) {
+      if (firstList.get(0).getCreationTime().compareTo(secondList.get(0).getCreationTime()) < 0) {
+        output.add(firstList.get(0));
+        firstList.remove(0);
+      } else {
+        output.add(secondList.get(0));
+        secondList.remove(0);
+      }
+    }
 
-		// Create compare to method for if statements
-		while (!firstList.isEmpty() && !secondList.isEmpty()) {
-			if (firstList.get(0).getCreationTime().compareTo(secondList.get(0).getCreationTime()) < 0) {
-				output.add(firstList.get(0));
-				firstList.remove(0);
-			} else {
-				output.add(secondList.get(0));
-				secondList.remove(0);
-			}
-		}
+    if (!firstList.isEmpty()) {
+      output.addAll(firstList);
+    }
 
-		if (!firstList.isEmpty()) {
-			output.addAll(firstList);
-		}
+    if (!secondList.isEmpty()) {
+      output.addAll(secondList);
+    }
 
-		if (!secondList.isEmpty()) {
-			output.addAll(secondList);
-		}
+    return output;
+  }
 
-		return output;
-	}
+   /** Sets the List of Conversations stored by this EventStore. */
+  public void setConversations(List<Conversation> conversations) {
+    this.conversations = conversations;
+  }
 
+  /** Sets the List of Users stored by this EventStore. */
+  public void setUsers(List<User> users) {
+    this.users = users;
+  }  
+
+    /** Sets the List of Users stored by this EventStore. */
+  public void setMessages(List<Message> messages) {
+    this.messages = messages;
+  }  
 }

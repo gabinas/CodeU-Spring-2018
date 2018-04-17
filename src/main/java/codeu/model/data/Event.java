@@ -23,5 +23,4 @@ public class Event {
   public Instant getCreationTime(){
     return creation;
   }
-
 }
