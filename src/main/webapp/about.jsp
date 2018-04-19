@@ -44,7 +44,7 @@
       </p>
 
       <ul>
-        <li><strong>Gabriela Lugo:</strong> Coming Soon!<!-- Write a little about yourself here --> </li>
+        <li><strong>Gabriela Lugo:</strong> CS major and Math minor in UBC </li>
         <li><strong>Martin Landin:</strong> Coming Soon!<!-- Write a little about yourself here --></li>
         <li><strong>Mary Shen:</strong> Coming Soon!<!-- Write a little about yourself here --></li>
         <li><strong>Shining Liu</strong></li>
