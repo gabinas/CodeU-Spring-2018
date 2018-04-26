@@ -71,19 +71,4 @@ public class EventStore {
 
     return output;
   }
-
-   /** Sets the List of Conversations stored by this EventStore. */
-  public void setConversations(List<Conversation> conversations) {
-    this.conversations = conversations;
-  }
-
-  /** Sets the List of Users stored by this EventStore. */
-  public void setUsers(List<User> users) {
-    this.users = users;
-  }  
-
-    /** Sets the List of Users stored by this EventStore. */
-  public void setMessages(List<Message> messages) {
-    this.messages = messages;
-  }  
 }

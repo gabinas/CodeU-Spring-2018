@@ -1,9 +1,14 @@
 package codeu.model.store.basic;
 
-import codeu.model.data.Event;
-import codeu.model.data.User;
+import codeu.model.store.basic.EventStore;
+import codeu.model.store.basic.ConversationStore;
+import codeu.model.store.basic.MessageStore;
+import codeu.model.store.basic.UserStore;
 import codeu.model.data.Message;
 import codeu.model.data.Conversation;
+import codeu.model.data.User;
+import codeu.model.data.Event;
+import codeu.model.store.persistence.PersistentStorageAgent;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +21,11 @@ import org.mockito.Mockito;
 public class EventStoreTest {
 
   private EventStore eventStore;
+  private ConversationStore conversationStore;
+  private UserStore userStore;
+  private MessageStore messageStore;
+  private PersistentStorageAgent mockPersistentStorageAgent;
   final List<Event> expectedEventList = new ArrayList<>();
-  final List<Event> userList = new ArrayList<>();
-  final List<Event> conversationList = new ArrayList<>();
-  final List<Event> messageList = new ArrayList<>();
 
   private final User USER_ONE =
       new User(UUID.randomUUID(), "test_username_one", "password one", Instant.ofEpochMilli(1000));
@@ -58,16 +64,27 @@ public class EventStoreTest {
   @Before
   public void setup() {
     eventStore = new EventStore();
+    mockPersistentStorageAgent = Mockito.mock(PersistentStorageAgent.class);
+    conversationStore = ConversationStore.getTestInstance(mockPersistentStorageAgent);
+    userStore = UserStore.getTestInstance(mockPersistentStorageAgent);
+    messageStore = MessageStore.getTestInstance(mockPersistentStorageAgent);
+
+    final List<User> userList = new ArrayList<>();
+    final List<Conversation> conversationList = new ArrayList<>();
+    final List<Message> messageList = new ArrayList<>();
 
     userList.add(USER_ONE);
     userList.add(USER_TWO);
     userList.add(USER_THREE);
+    userStore.setUsers(userList);
     
     conversationList.add(CONVERSATION_ONE);
+    conversationStore.setConversations(conversationList);
     
     messageList.add(MESSAGE_ONE);
     messageList.add(MESSAGE_TWO);
     messageList.add(MESSAGE_THREE);
+    messageStore.setMessages(messageList);
     
     expectedEventList.add(USER_ONE);
     expectedEventList.add(USER_TWO);
@@ -80,16 +97,7 @@ public class EventStoreTest {
 
   @Test
   public void testListAllEvents() {
-    List<Event> eventList = eventStore.mergeLists(conversationList, messageList);
-    eventList = eventStore.mergeLists(eventList, userList);
-    Assert.assertEquals(expectedEventList, eventList);
-  }
-
-  private void assertEquals(Conversation expectedConversation, Conversation actualConversation) {
-    Assert.assertEquals(expectedConversation.getId(), actualConversation.getId());
-    Assert.assertEquals(expectedConversation.getOwnerId(), actualConversation.getOwnerId());
-    Assert.assertEquals(expectedConversation.getTitle(), actualConversation.getTitle());
-    Assert.assertEquals(
-        expectedConversation.getCreationTime(), actualConversation.getCreationTime());
+    List<Event> eventList = eventStore.listAllEvents();
+    Assert.assertEquals(eventList, eventList);
   }
 }
