@@ -63,7 +63,6 @@ public class EventStoreTest {
 
   @Before
   public void setup() {
-    eventStore = new EventStore();
     mockPersistentStorageAgent = Mockito.mock(PersistentStorageAgent.class);
     conversationStore = ConversationStore.getTestInstance(mockPersistentStorageAgent);
     userStore = UserStore.getTestInstance(mockPersistentStorageAgent);
@@ -93,11 +92,13 @@ public class EventStoreTest {
     expectedEventList.add(MESSAGE_TWO);
     expectedEventList.add(USER_THREE);
     expectedEventList.add(MESSAGE_THREE);
+
+    eventStore = EventStore.getTestInstance(messageStore, conversationStore, userStore);
   }
 
   @Test
   public void testListAllEvents() {
     List<Event> eventList = eventStore.listAllEvents();
-    Assert.assertEquals(eventList, eventList);
+    Assert.assertEquals(expectedEventList, eventList);
   }
 }

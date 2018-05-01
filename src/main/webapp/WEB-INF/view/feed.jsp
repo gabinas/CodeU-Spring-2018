@@ -11,10 +11,7 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
 <%
-List<Conversation> conversations = (List<Conversation>) request.getAttribute("conversations");
-List<Message> messages = (List<Message>) request.getAttribute("messages");
-List<User> users = (List<User>) request.getAttribute("users");
-EventStore events = new EventStore();
+EventStore events = EventStore.getInstance();
 List<Event> allEvents = events.listAllEvents();
 %>
 
@@ -59,9 +56,8 @@ List<Event> allEvents = events.listAllEvents();
   <div id="feed">
     <ul>
   <%
-    SimpleDateFormat formatter = new SimpleDateFormat("dd MM yyyy HH:mm:ss");
+    SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss a zzz yyyy");
     for (Event event : allEvents) {
-      Date myDate = Date.from(event.getCreationTime());
       String time = formatter.format(myDate);
       String renderEvent = "something happened";
   %>
