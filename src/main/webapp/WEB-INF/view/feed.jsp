@@ -58,6 +58,7 @@ List<Event> allEvents = events.listAllEvents();
   <%
     SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss a zzz yyyy");
     for (Event event : allEvents) {
+      Date myDate = Date.from(event.getCreationTime());
       String time = formatter.format(myDate);
       String renderEvent = "something happened";
   %>
