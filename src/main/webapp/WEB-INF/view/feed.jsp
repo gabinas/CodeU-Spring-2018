@@ -60,7 +60,7 @@ List<Event> allEvents = events.listAllEvents();
     for (Event event : allEvents) {
       Date myDate = Date.from(event.getCreationTime());
       String time = formatter.format(myDate);
-      String renderEvent = "something happened";
+      String renderEvent = event.toString();
   %>
     <li><strong><%= time %>:</strong> <%= renderEvent %></li>
   <%

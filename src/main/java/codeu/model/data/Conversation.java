@@ -17,6 +17,9 @@ package codeu.model.data;
 import java.time.Instant;
 import java.util.UUID;
 
+import codeu.model.store.basic.ConversationStore;
+import codeu.model.store.basic.UserStore;
+
 /**
  * Class representing a conversation, which can be thought of as a chat room.
  * Conversations are created by a User and contain Messages.
@@ -63,5 +66,11 @@ public class Conversation extends Event {
 	/** Returns the creation time of this Conversation. */
 	public Instant getCreationTime() {
 		return super.getCreationTime();
+	}
+	
+	/** Renders event for activity feed */
+	public String toString() {
+		String author = UserStore.getInstance().getUser(this.getOwnerId()).getName();
+		return author+" created a new conversation: "+this.getTitle();
 	}
 }

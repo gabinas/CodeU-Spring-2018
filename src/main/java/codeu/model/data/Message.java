@@ -17,6 +17,9 @@ package codeu.model.data;
 import java.time.Instant;
 import java.util.UUID;
 
+import codeu.model.store.basic.ConversationStore;
+import codeu.model.store.basic.UserStore;
+
 /**
  * Class representing a message. Messages are sent by a User in a Conversation.
  */
@@ -72,5 +75,12 @@ public class Message extends Event{
 	/** Returns the creation time of this Message. */
 	public Instant getCreationTime() {
 		return super.getCreationTime();
+	}
+	
+	/** Renders event for activity feed */
+	public String toString() {
+		String author = UserStore.getInstance().getUser(this.getAuthorId()).getName();
+		String conversation = ConversationStore.getInstance().getConversation(this.getConversationId()).getTitle();
+		return author+" sent a new message to "+conversation+": "+this.getContent();
 	}
 }

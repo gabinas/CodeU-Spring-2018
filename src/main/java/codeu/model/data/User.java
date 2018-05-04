@@ -61,4 +61,8 @@ public class User extends Event{
 	public String getPassword() {
 		return hashedPassword;
 	}
+	
+	public String toString() {
+		return this.getName()+" joined!";
+	}
 }
