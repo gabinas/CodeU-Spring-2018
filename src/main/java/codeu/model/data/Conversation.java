@@ -71,6 +71,6 @@ public class Conversation extends Event {
 	/** Renders event for activity feed */
 	public String toString() {
 		String author = UserStore.getInstance().getUser(this.getOwnerId()).getName();
-		return author+" created a new conversation: "+this.getTitle();
+		return author+" created a new conversation: <a href=\"/chat/\""+this.getTitle()+"\">"+this.getTitle()+"</a>";
 	}
 }

@@ -81,6 +81,6 @@ public class Message extends Event{
 	public String toString() {
 		String author = UserStore.getInstance().getUser(this.getAuthorId()).getName();
 		String conversation = ConversationStore.getInstance().getConversation(this.getConversationId()).getTitle();
-		return author+" sent a new message to "+conversation+": "+this.getContent();
+		return author+" sent a new message to <a href=\"/chat/"+conversation+"\">"+conversation+"</a>"+": \""+this.getContent()+"\"";
 	}
 }

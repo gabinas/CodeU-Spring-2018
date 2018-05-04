@@ -25,6 +25,7 @@
     <a id="navTitle" href="/">TeamRocket Chat App</a>
     <a href="/conversations">Conversations</a>
     <% if(request.getSession().getAttribute("user") != null){ %>
+      <a href="/feed">Activity Feed</a>
       <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
     <% } else{ %>
       <a href="/login">Login</a>
@@ -44,7 +45,8 @@
       </p>
 
       <ul>
-        <li><strong>Gabriela Lugo:</strong> Coming Soon!<!-- Write a little about yourself here --> </li>
+        <li><strong>Gabriela Lugo:</strong> Computer Science major and Mathematics minor in The University
+        	of British Columbia. </li>
         <li><strong>Martin Landin:</strong> Coming Soon!<!-- Write a little about yourself here --></li>
         <li><strong>Mary Shen:</strong> Coming Soon!<!-- Write a little about yourself here --></li>
         <li><strong>Shining Liu</strong></li>

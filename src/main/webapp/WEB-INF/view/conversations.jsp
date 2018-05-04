@@ -13,75 +13,84 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 --%>
-<%@ page import="java.util.List" %>
-<%@ page import="codeu.model.data.Conversation" %>
+<%@ page import="java.util.List"%>
+<%@ page import="codeu.model.data.Conversation"%>
 
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Conversations</title>
-  <link rel="stylesheet" href="/css/main.css">
+<title>Conversations</title>
+<link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
 
-  <nav>
-    <a id="navTitle" href="/">CodeU Chat App</a>
-    <a href="/conversations">Conversations</a>
-    <% if(request.getSession().getAttribute("user") != null){ %>
-      <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
-    <% } else{ %>
-      <a href="/login">Login</a>
-      <a href="/register">Register</a>
-    <% } %>
-    <a href="/about.jsp">About</a>
-  </nav>
+	<nav>
+		<a id="navTitle" href="/">TeamRocket Chat App</a> <a href="/conversations">Conversations</a>
+		<%
+		if (request.getSession().getAttribute("user") != null) {
+		%>
+			<a href="/feed">Activity Feed</a>
+			<a>Hello <%=request.getSession().getAttribute("user")%>!</a>
+		<%
+		} else {
+		%>
+			<a href="/login">Login</a> <a href="/register">Register</a>
+		<%
+		}
+		%>
+		<a href="/about.jsp">About</a>
+	</nav>
 
-  <div id="container">
+	<div id="container">
 
-    <% if(request.getAttribute("error") != null){ %>
-        <h2 style="color:red"><%= request.getAttribute("error") %></h2>
-    <% } %>
+		<%
+		if (request.getAttribute("error") != null) {
+		%>
+			<h2 style="color: red"><%=request.getAttribute("error")%></h2>
+		<%
+		}
+		%>
 
-    <% if(request.getSession().getAttribute("user") != null){ %>
-      <h1>New Conversation</h1>
-      <form action="/conversations" method="POST">
-          <div class="form-group">
-            <label class="form-control-label">Title:</label>
-          <input type="text" name="conversationTitle">
-        </div>
+		<%
+		if (request.getSession().getAttribute("user") != null) {
+		%>
+			<h1>New Conversation</h1>
+			<form action="/conversations" method="POST">
+				<div class="form-group">
+					<label class="form-control-label">Title:</label> <input type="text"
+						name="conversationTitle">
+				</div>
+				<button type="submit">Create</button>
+			</form>
 
-        <button type="submit">Create</button>
-      </form>
+		<hr />
+		<%
+		}
+		%>
 
-      <hr/>
-    <% } %>
+		<h1>Conversations</h1>
 
-    <h1>Conversations</h1>
-
-    <%
-    List<Conversation> conversations =
-      (List<Conversation>) request.getAttribute("conversations");
-    if(conversations == null || conversations.isEmpty()){
-    %>
-      <p>Create a conversation to get started.</p>
-    <%
-    }
-    else{
-    %>
-      <ul class="mdl-list">
-    <%
-      for(Conversation conversation : conversations){
-    %>
-      <li><a href="/chat/<%= conversation.getTitle() %>">
-        <%= conversation.getTitle() %></a></li>
-    <%
-      }
-    %>
-      </ul>
-    <%
-    }
-    %>
-    <hr/>
-  </div>
+		<%
+		List<Conversation> conversations = (List<Conversation>) request.getAttribute("conversations");
+		if (conversations == null || conversations.isEmpty()) {
+		%>
+			<p>Create a conversation to get started.</p>
+		<%
+		} else {
+		%>
+			<ul class="mdl-list">
+			<%
+			for (Conversation conversation : conversations) {
+			%>
+				<li><a href="/chat/<%=conversation.getTitle()%>"> <%=conversation.getTitle()%></a></li>
+			<%
+			}
+			%>
+		</ul>
+		<%
+		}
+		%>
+		<hr />
+	</div>
 </body>
 </html>
