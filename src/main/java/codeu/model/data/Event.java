@@ -5,22 +5,30 @@ import java.util.UUID;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Event {
-  private final UUID id;
-  private final Instant creation;
+public class Event implements Comparable<Event> {
+	private final UUID id;
+	private final Instant creation;
 
-  public Event(UUID id, Instant creation){
-    this.id = id;
-    this.creation = creation;
-  }
+	public Event(UUID id, Instant creation) {
+		this.id = id;
+		this.creation = creation;
+	}
 
-  /** Returns the ID of this User. */
-  public UUID getId(){
-    return id;
-  }
+	/** Returns the ID of this User. */
+	public UUID getId() {
+		return id;
+	}
 
-  /** Returns the creation time of this User. */
-  public Instant getCreationTime(){
-    return creation;
-  }
+	/** Returns the creation time of this User. */
+	public Instant getCreationTime() {
+		return creation;
+	}
+
+	@Override
+	public int compareTo(Event otherEvent) {
+		if (this.getCreationTime().isBefore(otherEvent.getCreationTime())) {
+			return -1;
+		} else
+			return 1;
+	}
 }
