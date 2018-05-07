@@ -19,41 +19,50 @@ import java.util.UUID;
 
 /** Class representing a registered user. */
 public class User extends Event{
-  //private final UUID id;
-  private final String name;
-  private final String hashedPassword;
-  //private final Instant creation;
+	// private final UUID id;
+	private final String name;
+	private final String hashedPassword;
+	// private final Instant creation;
 
-  /**
-   * Constructs a new User.
-   *
-   * @param id the ID of this User
-   * @param name the username of this User
-   * @param hashedPassword the hashed password of this User
-   * @param creation the creation time of this User
-   */
-  public User(UUID id, String name, String hashedPassword, Instant creation) {
-    super(id, creation);    
-    this.name = name;
-    this.hashedPassword = hashedPassword;
-  }
+	/**
+	 * Constructs a new User.
+	 *
+	 * @param id
+	 *            the ID of this User
+	 * @param name
+	 *            the username of this User
+	 * @param hashedPassword
+	 *            the hashed password of this User
+	 * @param creation
+	 *            the creation time of this User
+	 */
+	public User(UUID id, String name, String hashedPassword, Instant creation) {
+		super(id, creation);
+		this.name = name;
+		this.hashedPassword = hashedPassword;
+	}
 
-  /** Returns the ID of this User. */
-  public UUID getId() {
-    return super.getId();
-  }
+	/** Returns the ID of this User. */
+	public UUID getId() {
+		return super.getId();
+	}
 
-  /** Returns the username of this User. */
-  public String getName() {
-    return name;
-  }
+	/** Returns the username of this User. */
+	public String getName() {
+		return name;
+	}
 
-  /** Returns the creation time of this User. */
-  public Instant getCreationTime() {
-    return super.getCreationTime();
-  }
-  /** Returns the password of this User */
-  public String getPassword() {
-    return hashedPassword;
-  }
+	/** Returns the creation time of this User. */
+	public Instant getCreationTime() {
+		return super.getCreationTime();
+	}
+
+	/** Returns the password of this User */
+	public String getPassword() {
+		return hashedPassword;
+	}
+	
+	public String toString() {
+		return this.getName()+" joined!";
+	}
 }

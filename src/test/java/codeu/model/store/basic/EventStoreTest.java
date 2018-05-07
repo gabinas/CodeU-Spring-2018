@@ -101,4 +101,5 @@ public class EventStoreTest {
     List<Event> eventList = eventStore.listAllEvents();
     Assert.assertEquals(expectedEventList, eventList);
   }
+
 }

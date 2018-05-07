@@ -17,53 +17,70 @@ package codeu.model.data;
 import java.time.Instant;
 import java.util.UUID;
 
-/** Class representing a message. Messages are sent by a User in a Conversation. */
-public class Message extends Event {
+import codeu.model.store.basic.ConversationStore;
+import codeu.model.store.basic.UserStore;
 
- // private final UUID id;
-  private final UUID conversation;
-  private final UUID author;
-  private final String content;
- // private final Instant creation;
+/**
+ * Class representing a message. Messages are sent by a User in a Conversation.
+ */
+public class Message extends Event{
 
-  /**
-   * Constructs a new Message.
-   *
-   * @param id the ID of this Message
-   * @param conversation the ID of the Conversation this Message belongs to
-   * @param author the ID of the User who sent this Message
-   * @param content the text content of this Message
-   * @param creation the creation time of this Message
-   */
-  public Message(UUID id, UUID conversation, UUID author, String content, Instant creation) {
-    super(id, creation);
-    this.conversation = conversation;
-    this.author = author;
-    this.content = content;
-  }
+	// private final UUID id;
+	private final UUID conversation;
+	private final UUID author;
+	private final String content;
+	// private final Instant creation;
 
-  /** Returns the ID of this Message. */
-  public UUID getId() {
-    return super.getId();
-  }
+	/**
+	 * Constructs a new Message.
+	 *
+	 * @param id
+	 *            the ID of this Message
+	 * @param conversation
+	 *            the ID of the Conversation this Message belongs to
+	 * @param author
+	 *            the ID of the User who sent this Message
+	 * @param content
+	 *            the text content of this Message
+	 * @param creation
+	 *            the creation time of this Message
+	 */
+	public Message(UUID id, UUID conversation, UUID author, String content, Instant creation) {
+		super(id, creation);
+		this.conversation = conversation;
+		this.author = author;
+		this.content = content;
+	}
 
-  /** Returns the ID of the Conversation this Message belongs to. */
-  public UUID getConversationId() {
-    return conversation;
-  }
+	/** Returns the ID of this Message. */
+	public UUID getId() {
+		return super.getId();
+	}
 
-  /** Returns the ID of the User who sent this Message. */
-  public UUID getAuthorId() {
-    return author;
-  }
+	/** Returns the ID of the Conversation this Message belongs to. */
+	public UUID getConversationId() {
+		return conversation;
+	}
 
-  /** Returns the text content of this Message. */
-  public String getContent() {
-    return content;
-  }
+	/** Returns the ID of the User who sent this Message. */
+	public UUID getAuthorId() {
+		return author;
+	}
 
-  /** Returns the creation time of this Message. */
-  public Instant getCreationTime() {
-    return super.getCreationTime();
-  }
+	/** Returns the text content of this Message. */
+	public String getContent() {
+		return content;
+	}
+
+	/** Returns the creation time of this Message. */
+	public Instant getCreationTime() {
+		return super.getCreationTime();
+	}
+	
+	/** Renders event for activity feed */
+	public String toString() {
+		String author = UserStore.getInstance().getUser(this.getAuthorId()).getName();
+		String conversation = ConversationStore.getInstance().getConversation(this.getConversationId()).getTitle();
+		return author+" sent a new message to <a href=\"/chat/"+conversation+"\">"+conversation+"</a>"+": \""+this.getContent()+"\"";
+	}
 }
