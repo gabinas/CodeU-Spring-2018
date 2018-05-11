@@ -62,28 +62,23 @@ public class EventStore {
    */
   public List<Event> listAllEvents() {
 
-    List<Event> events = new ArrayList<>();
     List<Event> co = new ArrayList<>();
     List<Event> me = new ArrayList<>();
     List<Event> us = new ArrayList<>();
 
-    for (Conversation c : conversations) 
-      co.add(c);
-  
-    for (Message m : messages) 
-      me.add(m);
-
-    for (User u : users)
-      us.add(u);
+    co.addAll(conversations);
+    me.addAll(messages);
+    us.addAll(users);
 
     return mergeLists(co,me,us);
   }
   
 
   /**
-   * Takes two sorted lists and merges while keeping the sort
+   * Takes three sorted lists and merges while keeping the sort
    * @param firstList
    * @param secondList
+   * @param thirdList
    * @return sorted merge of second and first list
    */
   public List<Event> mergeLists(List<Event> firstList, List<Event> secondList, List<Event> thirdList) {

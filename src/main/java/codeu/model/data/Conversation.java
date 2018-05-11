@@ -48,11 +48,6 @@ public class Conversation extends Event {
 		this.title = title;
 	}
 
-	/** Returns the ID of this Conversation. */
-	public UUID getId() {
-		return super.getId();
-	}
-
 	/** Returns the ID of the User who created this Conversation. */
 	public UUID getOwnerId() {
 		return owner;

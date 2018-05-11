@@ -19,13 +19,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Conversations</title>
-<link rel="stylesheet" href="/css/main.css">
+  <title>Conversations</title>
+  <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
 
   <nav>
-    <a id="navTitle" href="/">TeamRocket Chat App</a> <a href="/conversations">Conversations</a>
+  	<a id="navTitle" href="/">TeamRocket Chat App</a> <a href="/conversations">Conversations</a>
     <%
     if (request.getSession().getAttribute("user") != null) {
     %>

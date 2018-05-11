@@ -28,7 +28,10 @@ public class Event implements Comparable<Event> {
   public int compareTo(Event otherEvent) {
     if (this.getCreationTime().isBefore(otherEvent.getCreationTime())) {
       return -1;
-    } else
-      return 1;
+    } else if(this.getCreationTime().isAfter(otherEvent.getCreationTime())) {
+    	return 1;
+    } else {
+      return 0;
+    }
   }
 }
