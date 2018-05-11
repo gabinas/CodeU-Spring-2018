@@ -17,48 +17,55 @@ package codeu.model.data;
 import java.time.Instant;
 import java.util.UUID;
 
+import codeu.model.store.basic.ConversationStore;
+import codeu.model.store.basic.UserStore;
+
 /**
- * Class representing a conversation, which can be thought of as a chat room. Conversations are
- * created by a User and contain Messages.
+ * Class representing a conversation, which can be thought of as a chat room.
+ * Conversations are created by a User and contain Messages.
  */
-public class Conversation {
-  public final UUID id;
-  public final UUID owner;
-  public final Instant creation;
-  public final String title;
+public class Conversation extends Event {
+	// public final UUID id;
+	public final UUID owner;
+	// public final Instant creation;
+	public final String title;
 
-  /**
-   * Constructs a new Conversation.
-   *
-   * @param id the ID of this Conversation
-   * @param owner the ID of the User who created this Conversation
-   * @param title the title of this Conversation
-   * @param creation the creation time of this Conversation
-   */
-  public Conversation(UUID id, UUID owner, String title, Instant creation) {
-    this.id = id;
-    this.owner = owner;
-    this.creation = creation;
-    this.title = title;
-  }
+	/**
+	 * Constructs a new Conversation.
+	 *
+	 * @param id
+	 *            the ID of this Conversation
+	 * @param owner
+	 *            the ID of the User who created this Conversation
+	 * @param title
+	 *            the title of this Conversation
+	 * @param creation
+	 *            the creation time of this Conversation
+	 */
+	public Conversation(UUID id, UUID owner, String title, Instant creation) {
+		super(id, creation);
+		this.owner = owner;
+		this.title = title;
+	}
 
-  /** Returns the ID of this Conversation. */
-  public UUID getId() {
-    return id;
-  }
+	/** Returns the ID of the User who created this Conversation. */
+	public UUID getOwnerId() {
+		return owner;
+	}
 
-  /** Returns the ID of the User who created this Conversation. */
-  public UUID getOwnerId() {
-    return owner;
-  }
+	/** Returns the title of this Conversation. */
+	public String getTitle() {
+		return title;
+	}
 
-  /** Returns the title of this Conversation. */
-  public String getTitle() {
-    return title;
-  }
-
-  /** Returns the creation time of this Conversation. */
-  public Instant getCreationTime() {
-    return creation;
-  }
+	/** Returns the creation time of this Conversation. */
+	public Instant getCreationTime() {
+		return super.getCreationTime();
+	}
+	
+	/** Renders event for activity feed */
+	public String toString() {
+		String author = UserStore.getInstance().getUser(this.getOwnerId()).getName();
+		return author+" created a new conversation: <a href=\"/chat/"+this.getTitle()+"\">"+this.getTitle()+"</a>";
+	}
 }
