@@ -47,7 +47,8 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
 <body onload="scrollChat()">
 
   <nav>
-    <a id="navTitle" href="/">TeamRocket Chat App</a> <a href="/conversations">Conversations</a>
+    <a id="navTitle" href="/">TeamRocket Chat App</a> 
+    <a href="/conversations">Conversations</a>
     <%
     if (request.getSession().getAttribute("user") != null) {
       %>
@@ -77,7 +78,7 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
         for (Message message : messages) {
           String author = UserStore.getInstance().getUser(message.getAuthorId()).getName();
         %>
-          <li><strong><%=author%>:</strong> <%=message.getContent()%></li>
+          <li><strong><a href="/users/<%=author%>"><%=author%></a>:</strong> <%=message.getContent()%></li>
         <%
         }
         %>
