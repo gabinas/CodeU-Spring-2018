@@ -1,19 +1,15 @@
 package codeu.controller;
 
 import codeu.model.store.basic.UserStore;
-import codeu.model.store.basic.ConversationStore;
 import codeu.model.store.basic.MessageStore;
 import codeu.model.data.Message;
 import codeu.model.data.User;
 import java.util.List;
 import java.io.IOException;
-import java.time.Instant;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.mindrot.jbcrypt.BCrypt;
-import java.util.ArrayList;
 import java.util.UUID;
 
 /**
@@ -28,10 +24,28 @@ public class ProfilePageServlet extends HttpServlet {
 	// Store class that gives access to Messages.
 	private MessageStore messageStore;
 	
-	/** Set up state for handling chat requests. */
+	/** Set up state for handling profile requests. */
   @Override
   public void init() throws ServletException {
-    super.init();
+	  super.init();
+	  setMessageStore(MessageStore.getInstance());
+	  setUserStore(UserStore.getInstance());
+  }
+
+  /**
+   * Sets the MessageStore used by this servlet. This function provides a common setup method for
+   * use by the test framework or the servlet's init() function.
+   */
+  void setMessageStore(MessageStore messageStore) {
+    this.messageStore = messageStore;
+  }
+
+  /**
+   * Sets the UserStore used by this servlet. This function provides a common setup method for use
+   * by the test framework or the servlet's init() function.
+   */
+  void setUserStore(UserStore userStore) {
+    this.userStore = userStore;
   }
 
 	/**
@@ -86,12 +100,17 @@ public class ProfilePageServlet extends HttpServlet {
 		}
 		
 		String requestUrl = request.getRequestURI();
-		String username2 = requestUrl.substring("/users/".length());
+		String profileUsername = requestUrl.substring("/users/".length());
 		
-		if(!username.equals(username2)) {
+		if(!username.equals(profileUsername)) {
 			request.setAttribute("error", "You are not authorized to change this.");
 			return;
 		}
+		
+		String bio = request.getParameter("bio");
+		
+		User profileUser = userStore.getUser(profileUsername);
+		profileUser.setBio(bio);
 						
 		// redirect to a GET request
 		response.sendRedirect("/users/" + username);

@@ -22,7 +22,7 @@ public class User extends Event{
 	// private final UUID id;
 	private final String name;
 	private final String hashedPassword;
-	// private final Instant creation;
+	private String bio;
 
 	/**
 	 * Constructs a new User.
@@ -36,10 +36,11 @@ public class User extends Event{
 	 * @param creation
 	 *            the creation time of this User
 	 */
-	public User(UUID id, String name, String hashedPassword, Instant creation) {
+	public User(UUID id, String name, String hashedPassword, String bio, Instant creation) {
 		super(id, creation);
 		this.name = name;
 		this.hashedPassword = hashedPassword;
+		this.bio = bio;
 	}
 
 	/** Returns the ID of this User. */
@@ -60,6 +61,14 @@ public class User extends Event{
 	/** Returns the password of this User */
 	public String getPassword() {
 		return hashedPassword;
+	}
+	
+	public String getBio() {
+		return bio;
+	}
+	
+	public void setBio(String bio) {
+		this.bio = bio;
 	}
 	
 	public String toString() {
