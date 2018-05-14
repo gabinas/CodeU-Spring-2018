@@ -48,7 +48,9 @@
         <li><strong>Gabriela Lugo:</strong> Computer Science major and Mathematics minor in The University
         	of British Columbia. </li>
         <li><strong>Martin Landin:</strong> Coming Soon!<!-- Write a little about yourself here --></li>
-        <li><strong>Mary Shen:</strong> Coming Soon!<!-- Write a little about yourself here --></li>
+        <li>
+          <strong>Mary Clare Shen:</strong> Computer Science major at Harvey Mudd College
+        </li>
         <li><strong>Shining Liu</strong></li>
         <ul>
           <li>Shining is a sophomore majoring in Web Design and Engineering at Santa Clara University.</li>
