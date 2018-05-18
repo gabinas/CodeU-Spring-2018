@@ -58,15 +58,8 @@
 </head>
 
 <body>
- <nav>
-   <a id="navTitle" href="/">CodeU Chat App</a>
-   <a href="/conversations">Conversations</a>
-   <% if(request.getSession().getAttribute("user") != null){ %>
-     <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
-   <% } else{ %>
-     <a href="/login">Login</a>
-   <% } %>
- </nav>
+
+<jsp:include page="navigation.jsp" />
 
 <div id="container">
   <h1>USER's Profile</h1>
@@ -77,7 +70,7 @@
      The user has not yet added a bio.
   </p>
   <button id = "edit_button" type="button" value="Edit" onclick="showTextArea()">Edit</button>
-  
+
   <h3 class="edit">Edit your About Me</h3>
   <textarea class="edit" id="bio_edit"></textarea>
   <button class="edit" type="button" value="Submit" onclick="collapseTextArea()">Submit</button>
