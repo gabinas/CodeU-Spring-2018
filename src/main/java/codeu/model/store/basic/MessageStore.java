@@ -102,6 +102,11 @@ public class MessageStore {
     return messagesInConversation;
   }
 
+  /** Access the current set of messages known to the application. */
+  public List<Message> getAllMessages(){
+    return messages;
+  }
+
   /** Sets the List of Messages stored by this MessageStore. */
   public void setMessages(List<Message> messages) {
     this.messages = messages;
