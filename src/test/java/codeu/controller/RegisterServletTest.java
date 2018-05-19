@@ -41,6 +41,7 @@ public class RegisterServletTest {
  @Test
   public void testDoPost_badUsername() throws IOException, ServletException {
     Mockito.when(mockRequest.getParameter("username")).thenReturn("bad !@#$% username");
+    Mockito.when(mockRequest.getParameter("password")).thenReturn("valid password");
 
     registerServlet.doPost(mockRequest, mockResponse);
 
@@ -50,8 +51,33 @@ public class RegisterServletTest {
   }
 
   @Test
+  public void testDoPost_blankUsername() throws IOException, ServletException {
+    Mockito.when(mockRequest.getParameter("username")).thenReturn("");
+    Mockito.when(mockRequest.getParameter("password")).thenReturn("valid password");
+
+    registerServlet.doPost(mockRequest, mockResponse);
+
+    verify(mockRequest)
+        .setAttribute("error", "Username cannot be blank.");
+    verify(mockRequestDispatcher).forward(mockRequest, mockResponse);
+  }
+
+  @Test
+  public void testDoPost_blankPassword() throws IOException, ServletException {
+    Mockito.when(mockRequest.getParameter("username")).thenReturn("test username");
+    Mockito.when(mockRequest.getParameter("password")).thenReturn("");
+
+    registerServlet.doPost(mockRequest, mockResponse);
+
+    verify(mockRequest)
+        .setAttribute("error", "Password cannot be blank.");
+    verify(mockRequestDispatcher).forward(mockRequest, mockResponse);
+  }
+
+  @Test
   public void testDoPost_newUser() throws IOException, ServletException {
     Mockito.when(mockRequest.getParameter("username")).thenReturn("test username");
+    Mockito.when(mockRequest.getParameter("password")).thenReturn("valid password");
 
     UserStore mockUserStore = Mockito.mock(UserStore.class);
     Mockito.when(mockUserStore.isUserRegistered("test username")).thenReturn(false);
@@ -70,6 +96,7 @@ public class RegisterServletTest {
   @Test
   public void testDoPost_existingUser() throws IOException, ServletException {
     Mockito.when(mockRequest.getParameter("username")).thenReturn("test username");
+    Mockito.when(mockRequest.getParameter("password")).thenReturn("valid password");
 
     UserStore mockUserStore = Mockito.mock(UserStore.class);
     Mockito.when(mockUserStore.isUserRegistered("test username")).thenReturn(true);
