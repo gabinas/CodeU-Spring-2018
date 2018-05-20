@@ -1,6 +1,7 @@
 package codeu.controller;
 
 import codeu.model.store.basic.UserStore;
+import codeu.model.store.persistence.PersistentStorageAgent;
 import codeu.model.store.basic.MessageStore;
 import codeu.model.data.Message;
 import codeu.model.data.User;
@@ -62,14 +63,11 @@ public class ProfilePageServlet extends HttpServlet {
 	  
 	  User user = userStore.getUser(username);
 	  if(user == null) {
-	  	// couldn't find user, redirect to home
+	  	// couldn't find user, redirect to conversations
 	  	System.out.println("User was non existent: " + username);
 	  	response.sendRedirect("/conversations");
 	  	return;
 	  }
-	  
-	  System.out.println(username);
-	  System.out.println(user.getId());
 	  
 	  UUID userId = user.getId();
 	  
@@ -111,6 +109,7 @@ public class ProfilePageServlet extends HttpServlet {
 		
 		User profileUser = userStore.getUser(profileUsername);
 		profileUser.setBio(bio);
+		userStore.addUser(profileUser);
 						
 		// redirect to a GET request
 		response.sendRedirect("/users/" + username);

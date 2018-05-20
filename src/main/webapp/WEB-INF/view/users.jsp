@@ -72,13 +72,21 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     <h1><%=profileUser%>'s Profile</h1>
     <hr />
     <h2>About <%=profileUser%></h2>
-    <p id="bio"><%=user.getBio()%></p>
     <%
-    if (request.getSession().getAttribute("user").equals(user.getName())) {
+    String bio;
+    if (user.getBio() == null){
+      bio = "The user has not yet added a bio.";
+    } else {
+      bio = user.getBio(); 
+    }
+    %>
+    <p id="bio"><%=bio%></p>
+    <%
+    if (user.getName().equals(request.getSession().getAttribute("user"))) {
     %>
       <h3>Edit your About Me (only you can see this)</h3>
       <form action="/users/<%=user.getName()%>" method="POST">
-        <textarea id="bio_edit" name="bio">Change your bio in here</textarea>
+        <textarea id="bio_edit" name="bio">Change your bio in here!</textarea>
         <button type="submit">Submit</button>
       </form>
     <%
@@ -89,12 +97,13 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     <div id="sent_msgs">
       <ul>
         <%
+        
         SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss a zzz yyyy");
         for (Message message : messages) {
           Date myDate = Date.from(message.getCreationTime());
           String time = formatter.format(myDate);
-        %>
-          <li><strong><a><%=time%></a>:</strong> <%=message.getContent()%></li>
+        %> 
+          <li><strong><%=time%>:</strong><%=message.getContent()%></li>
         <%
         }
         %>
