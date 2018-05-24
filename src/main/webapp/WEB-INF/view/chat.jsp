@@ -45,25 +45,7 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
 </script>
 </head>
 <body onload="scrollChat()">
-
-  <nav>
-    <a id="navTitle" href="/">TeamRocket Chat App</a> 
-    <a href="/conversations">Conversations</a>
-    <%
-    if (request.getSession().getAttribute("user") != null) {
-      %>
-      <a href="/feed">Activity Feed</a>
-      <a>Hello <%=request.getSession().getAttribute("user")%>!</a>
-      <%
-    } else {
-      %>
-      <a href="/login">Login</a> <a href="/register">Register</a>
-      <%
-    }
-    %>
-    <a href="/about.jsp">About</a>
-  </nav>
-
+  <jsp:include page="navigation.jsp" />
   <div id="container">
 
     <h1><%=conversation.getTitle()%>
