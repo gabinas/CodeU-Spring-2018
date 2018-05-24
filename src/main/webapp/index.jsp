@@ -27,7 +27,7 @@
     if (request.getSession().getAttribute("user") != null) {
       %>
       <a href="/feed">Activity Feed</a>
-      <a href="/users">Hello <%=request.getSession().getAttribute("user")%>!
+      <a href="/users/<%=request.getSession().getAttribute("user")%>">Hello <%=request.getSession().getAttribute("user")%>!
       </a>
       <%
     } else {

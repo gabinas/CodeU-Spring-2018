@@ -221,5 +221,5 @@ public class DefaultDataStore {
 		String messageContent = loremIpsum.substring(startIndex, endIndex).trim();
 	
 		return messageContent;
-		}
+	}
 }

@@ -33,6 +33,8 @@ public class User extends Event{
 	 *            the username of this User
 	 * @param hashedPassword
 	 *            the hashed password of this User
+	 * @param	bio
+	 * 						the bio of this User
 	 * @param creation
 	 *            the creation time of this User
 	 */
@@ -63,14 +65,17 @@ public class User extends Event{
 		return hashedPassword;
 	}
 	
+	/** Returns the bio of this User */
 	public String getBio() {
 		return bio;
 	}
 	
+	/** Changes the bio of this User */
 	public void setBio(String bio) {
 		this.bio = bio;
 	}
 	
+	/** Returns the rendered event for Activity Feed */
 	public String toString() {
 		return this.getName()+" joined!";
 	}

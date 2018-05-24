@@ -1,7 +1,6 @@
 package codeu.controller;
 
 import codeu.model.store.basic.UserStore;
-import codeu.model.store.persistence.PersistentStorageAgent;
 import codeu.model.store.basic.MessageStore;
 import codeu.model.data.Message;
 import codeu.model.data.User;
@@ -52,7 +51,7 @@ public class ProfilePageServlet extends HttpServlet {
 	/**
 	 * This function fires when a user navigates to the profile page. It grabs the
 	 * user name from the URL, finds the corresponding User, and fetches the user
-	 * info. It then forwards to users.jsp for rendering
+	 * info. It then forwards to profile.jsp for rendering
 	 */
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) 
@@ -79,6 +78,12 @@ public class ProfilePageServlet extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/view/users.jsp").forward(request, response);
 	}
 
+	
+	/**
+	  * This function fires when a user submits the change of bio form. It gets the new bio from
+	  * the submitted form data, checks that the user has permition to change it, and either changes the bio
+	  * or shows an error to the user.
+	  */
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws IOException, ServletException {
