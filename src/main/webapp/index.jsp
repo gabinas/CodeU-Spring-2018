@@ -28,7 +28,7 @@
       <a href="/login">Login</a>
       <a href="/register">Register</a>
     <% } %>
-    <a href="/feed">Activity Feed</a>
+    <a href="/feed">Feed</a>
     <a href="/conversations">Conversations</a>
     <a href="/testdata">Load Test Data</a>
     <a href="/about.jsp">About</a>
@@ -38,7 +38,7 @@
     <div
       style="width: 75%; margin-left: auto; margin-right: auto; margin-top: 50px;">
 
-      <h1>TeamRocket Chat App</h1>
+      <h1>Team Rocket Chat App</h1>
       <h2>Welcome!</h2>
 
       <ul>
