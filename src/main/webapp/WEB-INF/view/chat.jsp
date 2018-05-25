@@ -45,9 +45,7 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
 </script>
 </head>
 <body onload="scrollChat()">
-
   <jsp:include page="navigation.jsp" />
-
   <div id="container">
 
     <h1><%=conversation.getTitle()%>
@@ -62,7 +60,7 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
         for (Message message : messages) {
           String author = UserStore.getInstance().getUser(message.getAuthorId()).getName();
         %>
-          <li><strong><%=author%>:</strong> <%=message.getContent()%></li>
+          <li><strong><a href="/users/<%=author%>"><%=author%></a>:</strong> <%=message.getContent()%></li>
         <%
         }
         %>

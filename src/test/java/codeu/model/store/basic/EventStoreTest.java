@@ -28,11 +28,11 @@ public class EventStoreTest {
   final List<Event> expectedEventList = new ArrayList<>();
 
   private final User USER_ONE =
-      new User(UUID.randomUUID(), "test_username_one", "password one", Instant.ofEpochMilli(1000));
+      new User(UUID.randomUUID(), "test_username_one", "password one", "Test bio", Instant.ofEpochMilli(1000));
   private final User USER_TWO =
-      new User(UUID.randomUUID(), "test_username_two", "password two", Instant.ofEpochMilli(2000));
+      new User(UUID.randomUUID(), "test_username_two", "password two", "Test bio", Instant.ofEpochMilli(2000));
   private final User USER_THREE =
-      new User(UUID.randomUUID(), "test_username_three", "password three", Instant.ofEpochMilli(6000));
+      new User(UUID.randomUUID(), "test_username_three", "password three", "Test bio", Instant.ofEpochMilli(6000));
 
   private final UUID CONVERSATION_ID_ONE = UUID.randomUUID();
   private final Conversation CONVERSATION_ONE =
