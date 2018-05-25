@@ -18,18 +18,18 @@ import java.util.UUID;
 
 public class ProfilePageServlet extends HttpServlet {
 
-	// Store class that gives access to Users
-	private UserStore userStore;
+  // Store class that gives access to Users
+  private UserStore userStore;
 
-	// Store class that gives access to Messages.
-	private MessageStore messageStore;
-	
-	/** Set up state for handling profile requests. */
+  // Store class that gives access to Messages.
+  private MessageStore messageStore;
+  
+  /** Set up state for handling profile requests. */
   @Override
   public void init() throws ServletException {
-	  super.init();
-	  setMessageStore(MessageStore.getInstance());
-	  setUserStore(UserStore.getInstance());
+    super.init();
+    setMessageStore(MessageStore.getInstance());
+    setUserStore(UserStore.getInstance());
   }
 
   /**
@@ -48,76 +48,76 @@ public class ProfilePageServlet extends HttpServlet {
     this.userStore = userStore;
   }
 
-	/**
-	 * This function fires when a user navigates to the profile page. It grabs the
-	 * user name from the URL, finds the corresponding User, and fetches the user
-	 * info. It then forwards to profile.jsp for rendering
-	 */
-	@Override
-	public void doGet(HttpServletRequest request, HttpServletResponse response) 
-			throws IOException, ServletException {
-	
-		String requestUrl = request.getRequestURI();
-	  String username = requestUrl.substring("/users/".length());
-	  
-	  User user = userStore.getUser(username);
-	  if(user == null) {
-	  	// couldn't find user, redirect to conversations
-	  	System.out.println("User was non existent: " + username);
-	  	response.sendRedirect("/conversations");
-	  	return;
-	  }
-	  
-	  UUID userId = user.getId();
-	  
-	  List<Message> messages = messageStore.getMessagesFromUser(userId);
-	  
-	  request.setAttribute("user", user);
-	  request.setAttribute("messages", messages);
-	  
-		request.getRequestDispatcher("/WEB-INF/view/users.jsp").forward(request, response);
-	}
+  /**
+   * This function fires when a user navigates to the profile page. It grabs the
+   * user name from the URL, finds the corresponding User, and fetches the user
+   * info. It then forwards to profile.jsp for rendering
+   */
+  @Override
+  public void doGet(HttpServletRequest request, HttpServletResponse response) 
+      throws IOException, ServletException {
+  
+    String requestUrl = request.getRequestURI();
+    String username = requestUrl.substring("/users/".length());
+    
+    User user = userStore.getUser(username);
+    if(user == null) {
+      // couldn't find user, redirect to conversations
+      System.out.println("User was non existent: " + username);
+      response.sendRedirect("/conversations");
+      return;
+    }
+    
+    UUID userId = user.getId();
+    
+    List<Message> messages = messageStore.getMessagesFromUser(userId);
+    
+    request.setAttribute("user", user);
+    request.setAttribute("messages", messages);
+    
+    request.getRequestDispatcher("/WEB-INF/view/users.jsp").forward(request, response);
+  }
 
-	
-	/**
-	  * This function fires when a user submits the change of bio form. It gets the new bio from
-	  * the submitted form data, checks that the user has permition to change it, and either changes the bio
-	  * or shows an error to the user.
-	  */
-	@Override
-	public void doPost(HttpServletRequest request, HttpServletResponse response) 
-			throws IOException, ServletException {
-	
-		String username = (String) request.getSession().getAttribute("user");
-		if(username == null) {
-			//user is not logged in, don't let them change the info
-			System.out.println("User not found: " + username);
-			return;
-		}
-		
-		User user = userStore.getUser(username);
-		if(user == null) {
-			//couldn't find user, don't let them change info
-			response.sendRedirect("/WEB-INF/index.jsp");
-			return;
-		}
-		
-		String requestUrl = request.getRequestURI();
-		String profileUsername = requestUrl.substring("/users/".length());
-		
-		if(!username.equals(profileUsername)) {
-			request.setAttribute("error", "You are not authorized to change this.");
-			return;
-		}
-		
-		String bio = request.getParameter("bio");
-		
-		User profileUser = userStore.getUser(profileUsername);
-		profileUser.setBio(bio);
-		userStore.addUser(profileUser);
-						
-		// redirect to a GET request
-		response.sendRedirect("/users/" + username);
-	}
+  
+  /**
+    * This function fires when a user submits the change of bio form. It gets the new bio from
+    * the submitted form data, checks that the user has permition to change it, and either changes the bio
+    * or shows an error to the user.
+    */
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) 
+      throws IOException, ServletException {
+  
+    String username = (String) request.getSession().getAttribute("user");
+    if(username == null) {
+      //user is not logged in, don't let them change the info
+      System.out.println("User not found: " + username);
+      return;
+    }
+    
+    User user = userStore.getUser(username);
+    if(user == null) {
+      //couldn't find user, don't let them change info
+      response.sendRedirect("/WEB-INF/index.jsp");
+      return;
+    }
+    
+    String requestUrl = request.getRequestURI();
+    String profileUsername = requestUrl.substring("/users/".length());
+    
+    if(!username.equals(profileUsername)) {
+      request.setAttribute("error", "You are not authorized to change this.");
+      return;
+    }
+    
+    String bio = request.getParameter("bio");
+    
+    User profileUser = userStore.getUser(profileUsername);
+    profileUser.setBio(bio);
+    userStore.addUser(profileUser);
+            
+    // redirect to a GET request
+    response.sendRedirect("/users/" + username);
+  }
 
 }
