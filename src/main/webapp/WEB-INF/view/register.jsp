@@ -30,6 +30,7 @@
      <br/><br/>
      <button type="submit">Submit</button>
    </form>
+   <p>Have an account?</p><a href="/register">Register</a>
  </div>
 </body>
 </html>
