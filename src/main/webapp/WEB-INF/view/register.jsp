@@ -30,7 +30,7 @@
      <br/><br/>
      <button type="submit">Submit</button>
    </form>
-   <p>Have an account?</p><a href="/register">Register</a>
+   <p>Have an account? <a href="/login">Login</a></p>
  </div>
 </body>
 </html>

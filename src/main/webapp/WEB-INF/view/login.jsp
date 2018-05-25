@@ -45,7 +45,7 @@
       <br/><br/>
       <button type="submit">Login</button>
     </form>
-    <p>New user?</p><a href="/register">Register</a>
+    <p>New user? <a href="/register">Register</a></p>
   </div>
 </body>
 </html>
