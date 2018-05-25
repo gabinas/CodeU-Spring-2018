@@ -48,7 +48,7 @@
       <ul>
         <li><strong>Gabriela Lugo:</strong> Computer Science major and Mathematics minor in The University
         	of British Columbia. </li>
-        <li><strong>Martin Landin:</strong> Coming Soon!<!-- Write a little about yourself here --></li>
+        <li><strong>Martin Landin:</strong> Computer Science Major at Cal-State Monterey Bay</li>
         <li>
           <strong>Mary Clare Shen:</strong> Computer Science major at Harvey Mudd College
         </li>
