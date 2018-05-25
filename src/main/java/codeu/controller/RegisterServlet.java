@@ -78,8 +78,10 @@ public class RegisterServlet extends HttpServlet {
      request.getRequestDispatcher("/WEB-INF/view/register.jsp").forward(request, response);
      return;
    }
+   
+   String bio = "The user has not yet added a bio.";
 
-   User user = new User(UUID.randomUUID(), username, passwordHash, Instant.now());
+   User user = new User(UUID.randomUUID(), username, passwordHash, bio, Instant.now());
    userStore.addUser(user);
 
    response.sendRedirect("/login");

@@ -22,7 +22,7 @@ public class User extends Event{
 	// private final UUID id;
 	private final String name;
 	private final String hashedPassword;
-	// private final Instant creation;
+	private String bio;
 
 	/**
 	 * Constructs a new User.
@@ -33,13 +33,16 @@ public class User extends Event{
 	 *            the username of this User
 	 * @param hashedPassword
 	 *            the hashed password of this User
+	 * @param	bio
+	 * 						the bio of this User
 	 * @param creation
 	 *            the creation time of this User
 	 */
-	public User(UUID id, String name, String hashedPassword, Instant creation) {
+	public User(UUID id, String name, String hashedPassword, String bio, Instant creation) {
 		super(id, creation);
 		this.name = name;
 		this.hashedPassword = hashedPassword;
+		this.bio = bio;
 	}
 
 	/** Returns the ID of this User. */
@@ -62,6 +65,17 @@ public class User extends Event{
 		return hashedPassword;
 	}
 	
+	/** Returns the bio of this User */
+	public String getBio() {
+		return bio;
+	}
+	
+	/** Changes the bio of this User */
+	public void setBio(String bio) {
+		this.bio = bio;
+	}
+	
+	/** Returns the rendered event for Activity Feed */
 	public String toString() {
 		return this.getName()+" joined!";
 	}
