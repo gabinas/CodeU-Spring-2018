@@ -29,7 +29,7 @@
       <a href="/login">Login</a>
       <a href="/register">Register</a>
     <% } %>
-    <a href="/feed">Activity Feed</a>
+    <a href="/feed">Feed</a>
     <a href="/conversations">Conversations</a>
     <a href="/testdata">Load Test Data</a>
     <a href="/about.jsp">About</a>
@@ -40,31 +40,17 @@
       style="width:75%; margin-left:auto; margin-right:auto; margin-top: 50px;">
 
       <h1>About Us</h1>
-      <p>
-        This is an example chat application designed to be a starting point
-        for your CodeU project team work. Here's some stuff to think about:
-      </p>
 
       <ul>
-        <li><strong>Gabriela Lugo:</strong> Computer Science major and Mathematics minor in The University
-        	of British Columbia. </li>
+        <li><strong>Russell Cagle:</strong> Program Advisor and software engineer at Google</li>
+        <li><strong>Gabriela Lugo:</strong> Computer Science major and Mathematics minor at The University
+        	of British Columbia</li>
         <li><strong>Martin Landin:</strong> Coming Soon!<!-- Write a little about yourself here --></li>
         <li>
           <strong>Mary Clare Shen:</strong> Computer Science major at Harvey Mudd College
         </li>
-        <li><strong>Shining Liu</strong></li>
-        <ul>
-          <li>Shining is a sophomore majoring in Web Design and Engineering at Santa Clara University.</li>
-        </ul>
+        <li><strong>Shining Liu:</strong> Web Design and Engineering major at Santa Clara University</li>
       </ul>
-
-      <p>
-        This is your code now. Get familiar with it and get comfortable
-        working with your team to plan and make changes. Start by updating the
-        homepage and this about page to tell your users more about your team.
-        This page should also be used to describe the features and improvements
-        you've added.
-      </p>
     </div>
   </div>
 </body>
